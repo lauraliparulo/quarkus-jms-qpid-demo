@@ -39,8 +39,12 @@ public class BrokerTestResource implements QuarkusTestResourceLifecycleManager {
             FileUtils.deleteDirectory(parentDir);
 
             embeddedBroker = new EmbeddedActiveMQ();
+            embeddedBroker.setPropertiesResourcePath("broker.xml");
 
             embeddedBroker.start();
+            
+            
+            
         } catch (Exception e) {
             throw new RuntimeException("Problem starting embedded ActiveMQ Artemis broker", e);
         }

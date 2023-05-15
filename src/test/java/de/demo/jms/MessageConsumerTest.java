@@ -31,7 +31,7 @@ import jakarta.jms.Queue;
 import jakarta.ws.rs.core.Response.Status;
 
 @QuarkusTest
-@QuarkusTestResource(BrokerTestResource.class)
+@QuarkusTestResource(ArtemisTestResource.class)
 public class MessageConsumerTest {
 
 

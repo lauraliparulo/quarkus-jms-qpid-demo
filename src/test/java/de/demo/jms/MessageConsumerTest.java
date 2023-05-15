@@ -25,7 +25,6 @@ import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import jakarta.inject.Inject;
 import jakarta.jms.JMSContext;
 import jakarta.jms.JMSProducer;
 import jakarta.jms.Queue;
@@ -35,9 +34,7 @@ import jakarta.ws.rs.core.Response.Status;
 @QuarkusTestResource(BrokerTestResource.class)
 public class MessageConsumerTest {
 
-	
-	@Inject
-	BrokerTestResource broker;
+
     /**
      * Tests that receiving works in the {@link QpidJmsReceive} application code
      * using the extension, by sending a message to the broker and using the
@@ -50,9 +47,7 @@ public class MessageConsumerTest {
     @Test
     public void testReceive() throws Exception {
         String body = QpidJmsTestSupport.generateBody();
-        
-        broker.start();
-
+      
         try (JMSContext context = QpidJmsTestSupport.createContext()) {
         	context.start();
             Queue destination = context.createQueue(MessageProducer.PRODUCER_QUEUE);
@@ -66,6 +61,5 @@ public class MessageConsumerTest {
 
         Assertions.assertEquals(body, response.getBody().asString(), "Received body did not match that sent");
         
-        broker.stop();
     }
 }

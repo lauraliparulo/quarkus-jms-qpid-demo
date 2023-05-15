@@ -62,38 +62,14 @@
       <artifactId>rest-assured</artifactId>
       <scope>test</scope>
     </dependency>
-<!--    <dependency>-->
-<!--   <groupId>org.apache.activemq</groupId>-->
-<!--   <artifactId>artemis-junit</artifactId>-->
-  <!-- replace this for the version you are using -->
-<!--	<version>2.28.0</version>-->
-<!--   <scope>test</scope>    -->
-<!--    </dependency>-->
+   <dependency>
+   <groupId>org.apache.activemq</groupId>
+  <artifactId>artemis-junit</artifactId>
+ <!-- replace this for the version you are using -->
+	<version>2.28.0</version>
+   <scope>test</scope> 
+    </dependency>
     
-        <dependency>
-        <groupId>org.apache.activemq</groupId>
-        <artifactId>activemq-broker</artifactId>
-        <scope>test</scope>
-        <exclusions>
-            <exclusion>
-                <artifactId>geronimo-jms_1.1_spec</artifactId>
-                <groupId>org.apache.geronimo.specs</groupId>
-            </exclusion>
-        </exclusions>
-        	    <version>5.17.0</version>
-    </dependency>
-    <dependency>
-        <groupId>org.apache.activemq</groupId>
-        <artifactId>activemq-amqp</artifactId>
-        <scope>test</scope>
-        <exclusions>
-            <exclusion>
-                <groupId>org.apache.qpid</groupId>
-                <artifactId>proton-j</artifactId>
-            </exclusion>
-        </exclusions>
-           	    <version>5.17.0</version>
-    </dependency>
 <!--AMQP connector extension -->
 <dependency>
     <groupId>io.quarkus</groupId>

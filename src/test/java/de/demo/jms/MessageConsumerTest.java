@@ -48,9 +48,11 @@ public class MessageConsumerTest {
     public void testReceive() throws Exception {
         String body = QpidJmsTestSupport.generateBody();
       
+        
+      
         try (JMSContext context = QpidJmsTestSupport.createContext()) {
         	context.start();
-            Queue destination = context.createQueue(MessageProducer.PRODUCER_QUEUE);
+            Queue destination = context.createQueue(MessageConsumer.CONSUMER_QUEUE);
             JMSProducer producer = context.createProducer();
 
             producer.send(destination, body);

@@ -23,7 +23,7 @@ import io.quarkus.runtime.StartupEvent;
 @ApplicationScoped
 public class MessageProducer implements Runnable {
 
-	public final static String PRODUCER_QUEUE = "messages";
+	public final static String PRODUCER_QUEUE = "messages-to-amqp";
 	
 	public final static String PRODUCED_MESSAGE="produced_Message_";
 

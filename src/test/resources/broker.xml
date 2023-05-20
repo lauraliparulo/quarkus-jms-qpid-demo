@@ -25,26 +25,18 @@
 		</acceptors>
 
 		<addresses>
-			<address name="messages">
+			<address name="messages-from-amqp">
 				<anycast>
 					<queue name="messages-from-amqp" />
 				</anycast>
-						<anycast>
-					<queue name="persons-from-amqp" />
-				</anycast>
+			</address>
+
+			<address name="messages-to-amqp">
 				<anycast>
 					<queue name="messages-to-amqp" />
 				</anycast>
-						<anycast>
-					<queue name="persons-from-amqp" />
-				</anycast>
 			</address>
-<!-- 			<address name="messages-multi"> -->
-<!-- 				<multicast> -->
-<!-- 					<queue name="messages-1" /> -->
-<!-- 					<queue name="messages-2" /> -->
-<!-- 				</multicast> -->
-<!-- 			</address> -->
+
 		</addresses>
 	</core>
 </configuration>

@@ -36,22 +36,36 @@
 		</dependencies>
 	</dependencyManagement>
 	<dependencies>
+
+		<!-- JAKARTA EE 10 -->
 		<dependency>
 			<groupId>jakarta.jms</groupId>
 			<artifactId>jakarta.jms-api</artifactId>
 			<version>3.1.0</version>
 		</dependency>
+
 		<!-- Quarkus Qpid JMS -->
 		<dependency>
 			<groupId>org.amqphub.quarkus</groupId>
 			<artifactId>quarkus-qpid-jms</artifactId>
 		</dependency>
 
+		<!-- Dependency for the AMQP connector-->
+		<dependency>
+			<groupId>io.quarkus</groupId>
+			<artifactId>quarkus-smallrye-reactive-messaging-amqp</artifactId>
+		</dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-smallrye-reactive-messaging</artifactId>
+        </dependency>
+		
 		<!-- JAX-RS -->
 		<dependency>
 			<groupId>io.quarkus</groupId>
 			<artifactId>quarkus-resteasy-reactive</artifactId>
 		</dependency>
+		
 		<!-- Test Dependencies -->
 		<dependency>
 			<groupId>io.quarkiverse.artemis</groupId>
@@ -78,6 +92,19 @@
 			<artifactId>rest-assured</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- deployment for kubernetes-->
+		<dependency>
+			<groupId>io.quarkus</groupId>
+			<artifactId>quarkus-kubernetes</artifactId>
+		</dependency>
+		
+		<!-- deployment for minikube-->
+		<dependency>
+			<groupId>io.quarkus</groupId>
+			<artifactId>quarkus-minikube</artifactId>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>

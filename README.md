@@ -59,3 +59,15 @@ If you want to learn more about building native executables, please consult http
 Easily start your Reactive RESTful Web Services
 
 [Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
+
+
+### Start AMQP Broker on Kubernetes
+
+Start the broker:
+
+`kubectl run amqp --image=quay.io/artemiscloud/activemq-artemis-broker --port=5672 --env="AMQ_USER=admin" --env="AMQ_PASSWORD=admin" -n event-bus`
+
+Expose it as service
+
+`kubectl expose pod amqp --port=5672 -n event-bus`
+

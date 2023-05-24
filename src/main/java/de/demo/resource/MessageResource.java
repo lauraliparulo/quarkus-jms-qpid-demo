@@ -26,9 +26,10 @@ public class MessageResource {
 
     @GET
     @Path("last")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String last() {
-        return consumer.getLastMessage();
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response last() {
+        String message = consumer.getLastMessage();
+        return Response.ok("Got message: "+message).build();
     }
      
     

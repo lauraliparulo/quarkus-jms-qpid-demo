@@ -59,7 +59,7 @@ public class MessageConsumerTest {
         }
 
         Response response = RestAssured.with().body(body).get(ENDPOINT_PATH);
-        Assertions.assertEquals(Status.OK.getStatusCode(), response.statusCode());
+        Assertions.assertEquals(Status.NO_CONTENT.getStatusCode(), response.statusCode());
 
         Assertions.assertEquals(body, response.getBody().asString(), "Received body did not match that sent");
         

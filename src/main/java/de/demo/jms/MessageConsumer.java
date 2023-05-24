@@ -22,7 +22,7 @@ import jakarta.jms.Message;
 @ApplicationScoped
 public class MessageConsumer implements Runnable {
 	
-	public final static String CONSUMER_QUEUE = "messages-queue";
+	public final static String CONSUMER_QUEUE = "messages-from-amqp";
 
     @Inject
     ConnectionFactory connectionFactory;
@@ -48,12 +48,12 @@ public class MessageConsumer implements Runnable {
         try (JMSContext context = connectionFactory.createContext(JmsContext.AUTO_ACKNOWLEDGE)) {
             JMSConsumer consumer = context.createConsumer(context.createQueue(CONSUMER_QUEUE));
             while (true) {
-                Message message = consumer.receive();
-                if (message == null) return;
-                lastMessage = message.getBody(String.class);
+//                Message message = consumer.receive();
+//                if (message == null) return;
+//                lastMessage = message.getBody(String.class);
+                
+                lastMessage = consumer.receiveBody(String.class, 2000L);
             }
-        } catch (JMSException e) {
-            throw new RuntimeException(e);
         }
     }
 }

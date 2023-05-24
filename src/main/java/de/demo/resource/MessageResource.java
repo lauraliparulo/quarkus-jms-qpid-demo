@@ -26,20 +26,20 @@ public class MessageResource {
 
     @GET
     @Path("last")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response last() {
-        String message = consumer.getLastMessage();
-        return Response.ok(message).build();
+//    @Produces(MediaType.APPLICATION_JSON)
+    public String last() {
+        return consumer.getLastMessage();
+//        return Response.ok(message).build();
     }
      
     
     @POST
     @Path("send")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response sendMessage(String message) {
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    @Produces(MediaType.APPLICATION_JSON)
+    public void sendMessage(String message) {
          producer.sendMessageBody(message);
-         return Response.status(201).build();
+//         return Response.status(201).build();
     }
     
   

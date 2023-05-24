@@ -20,7 +20,7 @@ public class QpidJmsTestSupport {
      */
 //    public static final String CONNECTION_URL = "amqp://localhost:5672";
     
-    public static final String CONNECTION_URL = "amqp://localhost:15672";
+    public static final String CONNECTION_URL = "amqp://localhost:5672";
 
     public static JMSContext createContext() throws JMSException  {
         JmsConnectionFactory jmsConnectionFactory = new JmsConnectionFactory("quarkus","quarkus",CONNECTION_URL);

@@ -4,8 +4,6 @@ import static de.demo.jms.QpidJmsTestSupport.RECEIVE_MESSAGE_ENDPOINT_PATH;
 import static de.demo.jms.QpidJmsTestSupport.SEND_MESSAGE_ENDPOINT_PATH;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 import io.quarkus.artemis.test.ArtemisTestResource;
@@ -15,7 +13,6 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import jakarta.jms.JMSConsumer;
 import jakarta.jms.JMSContext;
-import jakarta.jms.JMSProducer;
 import jakarta.jms.Queue;
 import jakarta.ws.rs.core.Response.Status;
 
@@ -41,7 +38,13 @@ public class MessageProducerTest {
             Queue destination = context.createQueue(MessageProducer.PRODUCER_QUEUE);
             JMSConsumer consumer = context.createConsumer(destination);
             Thread.sleep(5000);
-            Assertions.assertEquals(body, consumer.receiveBody(String.class, 2000L), "Received body did not match that sent");
+            
+          response = RestAssured.with().body(body).get(RECEIVE_MESSAGE_ENDPOINT_PATH);
+            Assertions.assertEquals(Status.OK.getStatusCode(), response.statusCode());
+
+            Assertions.assertEquals(body, response.getBody().asString(), "Received body did not match that sent");
+            
+    
         }
     }
     

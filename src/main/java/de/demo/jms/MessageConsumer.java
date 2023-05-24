@@ -51,8 +51,6 @@ public class MessageConsumer implements Runnable {
                 Message message = consumer.receive();
                 if (message == null) return;
                 lastMessage = message.getBody(String.class);
-                
-//                lastMessage = consumer.receiveBody(String.class, 2000L);
             }
         } catch (JMSException e) {
 			// TODO Auto-generated catch block

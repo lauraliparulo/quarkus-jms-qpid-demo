@@ -35,7 +35,7 @@ public class QpidJmsTestSupport {
 //        * @see JMSContext#AUTO_ACKNOWLEDGE
 //        * @see JMSContext#DUPS_OK_ACKNOWLEDGE
         
-        return jmsConnectionFactory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
+        return jmsConnectionFactory.createContext(JMSContext.DUPS_OK_ACKNOWLEDGE);
     }
 
     public static String generateBody() {

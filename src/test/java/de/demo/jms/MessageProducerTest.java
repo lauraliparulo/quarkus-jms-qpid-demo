@@ -23,7 +23,7 @@ public class MessageProducerTest {
         String body = QpidJmsTestSupport.generateBody();
 
         io.restassured.response.Response response = RestAssured.with().body(body).post(SEND_MESSAGE_ENDPOINT_PATH);
-        Assertions.assertEquals(Status.NO_CONTENT.getStatusCode(), response.statusCode());
+        Assertions.assertEquals(Status.CREATED.getStatusCode(), response.statusCode());
 
         try (JMSContext context = QpidJmsTestSupport.createContext()) {
             Queue destination = context.createQueue(MessageProducer.PRODUCER_QUEUE);

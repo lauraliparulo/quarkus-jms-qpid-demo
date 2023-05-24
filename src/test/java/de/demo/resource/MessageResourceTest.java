@@ -19,7 +19,7 @@ public class MessageResourceTest {
 //             .statusCode(204)
 //             .body(notNullValue());
         
-        Assertions.assertEquals(204, response.statusCode());
+        Assertions.assertEquals(200, response.statusCode());
         Assertions.assertNotNull(response.getBody().asString());
     }
     

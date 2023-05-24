@@ -46,7 +46,7 @@ public class MessageProducer implements Runnable {
 
     @Override
     public void run() {
-            sendMessageBody(PRODUCED_MESSAGE+Integer.toString(random.nextInt(100)));
+//            sendMessageBody(PRODUCED_MESSAGE+Integer.toString(random.nextInt(100)));
     }
  
     

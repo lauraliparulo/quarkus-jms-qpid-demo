@@ -48,12 +48,15 @@ public class MessageConsumer implements Runnable {
         try (JMSContext context = connectionFactory.createContext(JmsContext.AUTO_ACKNOWLEDGE)) {
             JMSConsumer consumer = context.createConsumer(context.createQueue(CONSUMER_QUEUE));
             while (true) {
-//                Message message = consumer.receive();
-//                if (message == null) return;
-//                lastMessage = message.getBody(String.class);
+                Message message = consumer.receive();
+                if (message == null) return;
+                lastMessage = message.getBody(String.class);
                 
-                lastMessage = consumer.receiveBody(String.class, 2000L);
+//                lastMessage = consumer.receiveBody(String.class, 2000L);
             }
-        }
+        } catch (JMSException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 }

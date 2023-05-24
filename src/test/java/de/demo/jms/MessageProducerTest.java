@@ -26,7 +26,7 @@ public class MessageProducerTest {
         Assertions.assertEquals(Status.NO_CONTENT.getStatusCode(), response.statusCode());
 
         try (JMSContext context = QpidJmsTestSupport.createContext()) {
-            Queue destination = context.createQueue(MessageProducer.PRODUCER_QUEUE);
+            Queue destination = context.createQueue(MessageRandomProducer.PRODUCER_QUEUE);
             JMSConsumer consumer = context.createConsumer(destination);
 
             Assertions.assertEquals(body, consumer.receiveBody(String.class, 2000L), "Received body did not match that sent");

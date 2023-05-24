@@ -29,7 +29,7 @@ public class MessageResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response last() {
         String message = consumer.getLastMessage();
-        return Response.ok("Got message: "+message).build();
+        return Response.ok(message).build();
     }
      
     

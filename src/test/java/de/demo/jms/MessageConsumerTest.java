@@ -58,6 +58,7 @@ public class MessageConsumerTest {
             producer.send(destination, body);
         }
 
+
         Response response = RestAssured.with().body(body).get(RECEIVE_MESSAGE_ENDPOINT_PATH);
         Assertions.assertEquals(Status.NO_CONTENT.getStatusCode(), response.statusCode());
 

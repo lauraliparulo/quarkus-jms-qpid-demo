@@ -2,6 +2,8 @@ package de.demo.jms;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.qpid.jms.JmsContext;
 
@@ -27,7 +29,7 @@ public class MessageConsumer implements Runnable {
     @Inject
     ConnectionFactory connectionFactory;
 
-    private final ExecutorService scheduler = Executors.newSingleThreadExecutor();
+    private final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
 
     private volatile String lastMessage;
 
@@ -36,7 +38,8 @@ public class MessageConsumer implements Runnable {
     }
 
     void onStart(@Observes StartupEvent ev) {
-        scheduler.submit(this);
+		scheduler.scheduleWithFixedDelay(this, 0L, 5L, TimeUnit.SECONDS);
+//        scheduler.submit(this);
     }
 
     void onStop(@Observes ShutdownEvent ev) {

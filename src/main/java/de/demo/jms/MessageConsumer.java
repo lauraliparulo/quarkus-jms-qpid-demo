@@ -46,7 +46,7 @@ public class MessageConsumer implements Runnable {
     @Override
     public void run() {
         try (JMSContext context = connectionFactory.createContext(JmsContext.AUTO_ACKNOWLEDGE)) {
-            JMSConsumer consumer = context.createConsumer(context.createQueue()));
+            JMSConsumer consumer = context.createConsumer(context.createQueue(CONSUMER_QUEUE));
             while (true) {
                 Message message = consumer.receive();
                 if (message == null) return;

@@ -14,7 +14,7 @@ public class PersonReactiveProducer {
 	
 	
 	@Outgoing(PRODUCER_QUEUE)
-	Multi<Message<Person>> produceAStreamOfMessagesOfPersons() {
+	public Multi<Message<Person>> produceAStreamOfMessagesOfPersons() {
 	  return Multi.createFrom().items(
 	      Message.of(new Person("Luke"))
 	          .addMetadata(OutgoingAmqpMetadata.builder().withDurable(false).build()),

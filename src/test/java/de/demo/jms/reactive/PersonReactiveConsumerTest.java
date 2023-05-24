@@ -16,12 +16,12 @@ package de.demo.jms.reactive;
 * limitations under the License.
 */
 
-import static de.demo.jms.QpidJmsTestSupport.ENDPOINT_PATH;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import de.demo.jms.QpidJmsTestSupport;
+import io.quarkus.artemis.test.ArtemisTestResource;
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.RestAssured;
@@ -30,7 +30,7 @@ import jakarta.jms.JMSContext;
 import jakarta.jms.JMSProducer;
 import jakarta.jms.Queue;
 import jakarta.ws.rs.core.Response.Status;
-
+import static de.demo.jms.QpidJmsTestSupport.RECEIVE_PERSONS_ENDPOINT_PATH;
 @QuarkusTest
 @QuarkusTestResource(ArtemisTestResource.class)
 public class PersonReactiveConsumerTest {
@@ -59,7 +59,7 @@ public class PersonReactiveConsumerTest {
             producer.send(destination, body);
         }
 
-        Response response = RestAssured.with().body(body).get(ENDPOINT_PATH);
+        Response response = RestAssured.with().body(body).get(RECEIVE_PERSONS_ENDPOINT_PATH);
         Assertions.assertEquals(Status.OK.getStatusCode(), response.statusCode());
 
         Assertions.assertEquals(body, response.getBody().asString(), "Received body did not match that sent");

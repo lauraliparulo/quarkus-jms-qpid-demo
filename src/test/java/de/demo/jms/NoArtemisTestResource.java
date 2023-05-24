@@ -11,7 +11,7 @@ import org.apache.commons.io.FileUtils;
 
 import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
 
-public class ArtemisTestResource implements QuarkusTestResourceLifecycleManager {
+public class NoArtemisTestResource implements QuarkusTestResourceLifecycleManager {
     private static final String DEFAULT_CONFIGURATION_NAME = "<default>";
     private static final String QUARKUS_ARTEMIS_CONFIG_PREFIX = "quarkus.artemis";
 
@@ -20,15 +20,15 @@ public class ArtemisTestResource implements QuarkusTestResourceLifecycleManager 
     private EmbeddedActiveMQ embedded;
 
     @SuppressWarnings("unused")
-    public ArtemisTestResource() {
+    public NoArtemisTestResource() {
         this(DEFAULT_CONFIGURATION_NAME);
     }
 
-    protected ArtemisTestResource(String configurationName) {
+    protected NoArtemisTestResource(String configurationName) {
         this(QUARKUS_ARTEMIS_CONFIG_PREFIX, configurationName);
     }
 
-    protected ArtemisTestResource(String configurationPrefix, String configurationName) {
+    protected NoArtemisTestResource(String configurationPrefix, String configurationName) {
         this.configurationPrefix = configurationPrefix;
         this.configurationName = Objects.requireNonNull(configurationName);
     }

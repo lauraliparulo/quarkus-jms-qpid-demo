@@ -15,7 +15,7 @@ public class PersonReactiveConsumer {
 	public final static String CONSUMER_QUEUE = "persons-from-amqp";
 	
 	@Incoming(CONSUMER_QUEUE)
-	CompletionStage<Void> consume(Message<Person> person) {
+	public CompletionStage<Void> consume(Message<Person> person) {
 	    Optional<IncomingAmqpMetadata> metadata = person
 	            .getMetadata(IncomingAmqpMetadata.class);
 	    metadata.ifPresent(meta -> {

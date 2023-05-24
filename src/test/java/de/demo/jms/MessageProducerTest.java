@@ -38,7 +38,7 @@ public class MessageProducerTest {
         Assertions.assertEquals(Status.NO_CONTENT.getStatusCode(), response.statusCode());
 
         try (JMSContext context = QpidJmsTestSupport.createContext()) {
-        	context.start();
+//        	context.start();
             Queue destination = context.createQueue(MessageProducer.PRODUCER_QUEUE);
             JMSConsumer consumer = context.createConsumer(destination);
     
@@ -64,7 +64,7 @@ public class MessageProducerTest {
         
       
         try (JMSContext context = QpidJmsTestSupport.createContext()) {
-        	context.start();
+//        	context.start();
             Queue destination = context.createQueue(MessageConsumer.CONSUMER_QUEUE);
             JMSProducer producer = context.createProducer();
 

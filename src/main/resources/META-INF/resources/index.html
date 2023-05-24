@@ -23,11 +23,14 @@
 		<h2>Send message</h2>
 		<div class="row">
 			<p class="col-md-12">
-			<form id="sendMessage">
-				<label for="sendMessage">Insert message: </label> <input id="myMessage"
-					name="message" value="" /> 
-					<input type="submit" value="Send Message" />
-				</p>
+			<form id="sendMessage" method="POST">
+				<div>
+					<label for="sendMessage">Insert message: </label> 
+					<input id="myMessage" name="message" value="" /> 
+				</div>
+				<div>
+					<button>Send message</button>
+				</div>
 			</form>
 
 		</div>

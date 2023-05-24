@@ -11,6 +11,7 @@ import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 
 /**
  * A simple resource showing the last price.
@@ -35,9 +36,11 @@ public class MessageResource {
     
     @POST
     @Path("send")
-    @Consumes(MediaType.TEXT_PLAIN)
-    public void sendMessage(String message) {
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response sendMessage(String message) {
          producer.sendMessageBody(message);
+         return Response.status(201).build();
     }
      
 }

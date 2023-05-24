@@ -22,7 +22,7 @@ import jakarta.jms.Message;
 @ApplicationScoped
 public class MessageConsumer implements Runnable {
 	
-	public final static String CONSUMER_QUEUE = "messages-from-amqp";
+	public final static String CONSUMER_QUEUE = "messages-receive-queue";
 
     @Inject
     ConnectionFactory connectionFactory;

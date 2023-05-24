@@ -30,7 +30,7 @@ public class MessageProducerTest {
 //	}
 	
     @Test
-    @Order(1)
+    @Order(2)
     public void testSend() throws Exception {
         String body = QpidJmsTestSupport.generateBody();
 
@@ -56,7 +56,7 @@ public class MessageProducerTest {
      *             if there is an unexpected problem
      */
     @Test
-    @Order(2)
+    @Order(1)
     public void testReceive() throws Exception {
         String body = QpidJmsTestSupport.generateBody();
       

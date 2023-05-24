@@ -40,7 +40,7 @@ public class MessageProducerTest {
         try (JMSContext context = QpidJmsTestSupport.createContext()) {
             Queue destination = context.createQueue(MessageProducer.PRODUCER_QUEUE);
             JMSConsumer consumer = context.createConsumer(destination);
-
+            Thread.sleep(8000);
             Assertions.assertEquals(body, consumer.receiveBody(String.class, 2000L), "Received body did not match that sent");
         }
     }
@@ -68,10 +68,10 @@ public class MessageProducerTest {
             JMSProducer producer = context.createProducer();
 
             producer.send(destination, body);
-            
+            Thread.sleep(8000);
             Response response = RestAssured.with().body(body).get(RECEIVE_MESSAGE_ENDPOINT_PATH);
             Assertions.assertEquals(Status.OK.getStatusCode(), response.statusCode());
-
+     
             Assertions.assertEquals(body, response.getBody().asString(), "Received body did not match that sent");
         }
 

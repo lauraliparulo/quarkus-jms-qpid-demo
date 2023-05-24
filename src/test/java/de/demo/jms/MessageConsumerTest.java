@@ -47,7 +47,7 @@ public class MessageConsumerTest {
 	            JMSProducer producer = context.createProducer();
 
 	            producer.send(destination, body);
-	            
+	            Thread.sleep(8000);
 	            Response response = RestAssured.with().body(body).get(RECEIVE_MESSAGE_ENDPOINT_PATH);
 	            Assertions.assertEquals(Status.OK.getStatusCode(), response.statusCode());
 

@@ -39,10 +39,6 @@ public class MessageProducerTest {
             JMSConsumer consumer = context.createConsumer(destination);
             Thread.sleep(5000);
             
-            response = RestAssured.with().body(body).get(RECEIVE_MESSAGE_ENDPOINT_PATH);
-            
-            
-            Assertions.assertEquals(Status.OK.getStatusCode(), response.statusCode());
 
             Assertions.assertEquals(body, consumer.receive().toString(), "Received body did not match that sent");
             

@@ -1,11 +1,12 @@
 package de.demo.resource;
 
-import org.jboss.logging.Logger;
+import org.eclipse.microprofile.reactive.messaging.Message;
 
-import de.demo.jms.MessageConsumer;
-import de.demo.jms.MessageProducer;
+import de.demo.jms.reactive.Person;
+import de.demo.jms.reactive.PersonReactiveConsumer;
+import de.demo.jms.reactive.PersonReactiveProducer;
+import io.smallrye.mutiny.Multi;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
@@ -19,28 +20,28 @@ import jakarta.ws.rs.core.Response;
 @Path("/persons")
 public class PersonResource {
 
-    @Inject
-    MessageConsumer consumer;
-    
-    @Inject
-    MessageProducer producer;
-     
+	  @Inject
+	    PersonReactiveConsumer consumer;
+	    
+	    @Inject
+	    PersonReactiveProducer producer;
+	     
 
-    @GET
-    @Path("last")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String last() {
-        return consumer.getLastMessage();
-    }
-     
-    
-    @POST
-    @Path("send")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response sendMessage(String message) {
-         producer.sendMessageBody(message);
-         return Response.status(201).build();
-    }
+	    @GET
+	    @Path("last")
+	    @Produces(MediaType.TEXT_PLAIN)
+	    public String last() {
+	    	return "TODO";
+//	        return consumer.consume();
+	    }
+	     
+	    
+	    @POST
+	    @Path("send")
+	    @Produces(MediaType.APPLICATION_JSON)
+	    public Response sendStreamOfPersons() {
+	    	 Multi<Message<Person>> mp =  producer.produceAStreamOfMessagesOfPersons();
+	         return Response.status(201).build();
+	    }
      
 }

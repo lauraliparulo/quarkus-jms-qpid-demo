@@ -1,11 +1,7 @@
 package de.demo.resource;
 
-import org.eclipse.microprofile.reactive.messaging.Message;
-
-import de.demo.jms.reactive.Person;
-import de.demo.jms.reactive.PersonReactiveConsumer;
-import de.demo.jms.reactive.PersonReactiveProducer;
-import io.smallrye.mutiny.Multi;
+import de.demo.jms.MessageConsumer;
+import de.demo.jms.MessageProducer;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
@@ -22,27 +18,29 @@ import jakarta.ws.rs.core.Response;
 public class MessageResource {
 
     @Inject
-    PersonReactiveConsumer consumer;
+    MessageConsumer consumer;
     
     @Inject
-    PersonReactiveProducer producer;
+    MessageProducer producer;
      
 
     @GET
     @Path("last")
     @Produces(MediaType.TEXT_PLAIN)
     public String last() {
-    	return "TODO";
-//        return consumer.consume();
+        return consumer.getLastMessage();
     }
      
     
     @POST
     @Path("send")
+    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response sendStreamOfPersons() {
-    	 Multi<Message<Person>> mp =  producer.produceAStreamOfMessagesOfPersons();
+    public Response sendMessage(String message) {
+         producer.sendMessageBody(message);
          return Response.status(201).build();
     }
+    
+  
      
 }

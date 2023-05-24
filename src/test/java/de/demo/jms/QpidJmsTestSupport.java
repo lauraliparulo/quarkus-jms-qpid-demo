@@ -12,7 +12,8 @@ public class QpidJmsTestSupport {
     /**
      *As was used in {@link QpidJmsEndpoint}
      */
-    public static final String ENDPOINT_PATH = "/messages/last";
+    public static final String RECEIVE_MESSAGE_ENDPOINT_PATH = "/messages/last";
+    public static final String SEND_MESSAGE_ENDPOINT_PATH = "/messages/last";
 
     /**
      * As matches acceptor defined in src/test/resources/broker.xml,
@@ -20,7 +21,7 @@ public class QpidJmsTestSupport {
      */
 //    public static final String CONNECTION_URL = "amqp://localhost:5672";
     
-    public static final String CONNECTION_URL = "amqp://localhost:5672";
+    public static final String CONNECTION_URL = "amqp://localhost:15672";
 
     public static JMSContext createContext() throws JMSException  {
         JmsConnectionFactory jmsConnectionFactory = new JmsConnectionFactory("quarkus","quarkus",CONNECTION_URL);

@@ -10,8 +10,10 @@ import jakarta.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class PersonReactiveProducer {
 
+	public final static String PRODUCER_QUEUE = "persons-to-amqp";
 	
-	@Outgoing("persons-to-amqp")
+	
+	@Outgoing(PRODUCER_QUEUE)
 	Multi<Message<Person>> produceAStreamOfMessagesOfPersons() {
 	  return Multi.createFrom().items(
 	      Message.of(new Person("Luke"))

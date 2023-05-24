@@ -12,7 +12,9 @@ import jakarta.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class PersonReactiveConsumer {
 
-	@Incoming("persons-from-amqp")
+	public final static String CONSUMER_QUEUE = "persons-from-amqp";
+	
+	@Incoming(CONSUMER_QUEUE)
 	CompletionStage<Void> consume(Message<Person> person) {
 	    Optional<IncomingAmqpMetadata> metadata = person
 	            .getMetadata(IncomingAmqpMetadata.class);
@@ -21,15 +23,8 @@ public class PersonReactiveConsumer {
 	        String subject = meta.getSubject();
 	        });
 
-	    
-        // Acknowledge the incoming message, marking the AMQP message as `accepted`.
 	    return person.ack();
 	}
 	
-	
-//    @Incoming("hello")
-//    public Message<String> hello(Message<Person> person) {
-//        return person.withPayload("Hello " + person.getPayload());
-//    }
-    
+  
 }

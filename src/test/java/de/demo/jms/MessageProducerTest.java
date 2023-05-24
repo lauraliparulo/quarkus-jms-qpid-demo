@@ -68,13 +68,15 @@ public class MessageProducerTest {
             JMSProducer producer = context.createProducer();
 
             producer.send(destination, body);
+            
+            Response response = RestAssured.with().body(body).get(RECEIVE_MESSAGE_ENDPOINT_PATH);
+            Assertions.assertEquals(Status.OK.getStatusCode(), response.statusCode());
+
+            Assertions.assertEquals(body, response.getBody().asString(), "Received body did not match that sent");
         }
 
 
-        Response response = RestAssured.with().body(body).get(RECEIVE_MESSAGE_ENDPOINT_PATH);
-        Assertions.assertEquals(Status.OK.getStatusCode(), response.statusCode());
-
-        Assertions.assertEquals(body, response.getBody().asString(), "Received body did not match that sent");
+    
         
     }
 }

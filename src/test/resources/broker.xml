@@ -20,29 +20,30 @@
 		<security-enabled>false</security-enabled>
 
 		<acceptors>
-			<acceptor name="amqp-acceptor">tcp://localhost:15672?protocols=AMQP;username=quarkus;password=password</acceptor>
+			<acceptor name="amqp-acceptor">tcp://localhost:15672?protocols=AMQP;username=quarkus;password=password
+			</acceptor>
 			<!-- acceptor name="amqp-acceptor">tcp://localhost:5672?protocols=AMQP;username=quarkus;password=password;connectionTtl=2000000</acceptor -->
 		</acceptors>
 
 		<addresses>
-		
-					<address name="messages-queue">
+
+			<address name="messages-queue">
 				<anycast>
 					<queue name="messages-queue" />
 				</anycast>
 			</address>
-			
-<!-- 			<address name="messages-from-amqp"> -->
-<!-- 				<anycast> -->
-<!-- 					<queue name="messages-from-amqp" /> -->
-<!-- 				</anycast> -->
-<!-- 			</address> -->
 
-<!-- 			<address name="messages-to-amqp"> -->
-<!-- 				<anycast> -->
-<!-- 					<queue name="messages-to-amqp" /> -->
-<!-- 				</anycast> -->
-<!-- 			</address> -->
+			<address name="persons-amqp-queue">
+				<anycast>
+					<queue name="persons-amqp-queue" />
+				</anycast>
+			</address>
+
+			<!-- <address name="messages-to-amqp"> -->
+			<!-- <anycast> -->
+			<!-- <queue name="messages-to-amqp" /> -->
+			<!-- </anycast> -->
+			<!-- </address> -->
 
 		</addresses>
 	</core>

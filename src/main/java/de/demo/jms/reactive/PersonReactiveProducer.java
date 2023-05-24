@@ -10,7 +10,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class PersonReactiveProducer {
 
-	public final static String PRODUCER_QUEUE = "persons-to-amqp";
+	public final static String PRODUCER_QUEUE = "persons-amqp-queue";
 	
 	
 	@Outgoing(PRODUCER_QUEUE)

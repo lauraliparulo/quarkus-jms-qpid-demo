@@ -18,45 +18,54 @@ import jakarta.jms.JMSProducer;
 import jakarta.jms.Queue;
 
 /**
- * A bean producing random prices every 5 seconds and sending them to the prices JMS queue.
+ * A bean producing random prices every 5 seconds and sending them to the prices
+ * JMS queue.
  */
 @ApplicationScoped
 public class MessageProducer implements Runnable {
 
 	public final static String PRODUCER_QUEUE = "messages-queue";
-	
-	public final static String PRODUCED_MESSAGE="produced_Message_";
+
+	public final static String PRODUCED_MESSAGE = "produced_Message_";
 
 	@Inject
 	Logger log;
-	
-    @Inject
-    ConnectionFactory connectionFactory;
 
-    private final Random random = new Random();
-    private final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+	@Inject
+	ConnectionFactory connectionFactory;
 
-    void onStart(@Observes StartupEvent ev) {
-        scheduler.scheduleWithFixedDelay(this, 0L, 5L, TimeUnit.SECONDS);
-    }
+	JMSProducer producer;
+	Queue destination;
 
-    void onStop(@Observes ShutdownEvent ev) {
-        scheduler.shutdown();
-    }
+	private final Random random = new Random();
+	private final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
 
-    @Override
-    public void run() {
+	void onStart(@Observes StartupEvent ev) {
+		scheduler.scheduleWithFixedDelay(this, 0L, 5L, TimeUnit.SECONDS);
+	}
+
+	void onStop(@Observes ShutdownEvent ev) {
+		scheduler.shutdown();
+	}
+
+	@Override
+	public void run() {
+
+		try (JMSContext context = connectionFactory.createContext(JMSContext.AUTO_ACKNOWLEDGE)) {
+			destination = context.createQueue(PRODUCER_QUEUE);
+			producer = context.createProducer();
+
+		}
 //            sendMessageBody(PRODUCED_MESSAGE+Integer.toString(random.nextInt(100)));
-    }
- 
-    
-    public void sendMessageBody(String body) {
-        try (JMSContext context = connectionFactory.createContext(JMSContext.AUTO_ACKNOWLEDGE)) {
-            Queue destination = context.createQueue(PRODUCER_QUEUE);
-            JMSProducer producer = context.createProducer();
+	}
 
-            producer.send(destination, body);
-            log.info("post request - producer got message");
-        }
-    }
+	public void sendMessageBody(String body) {
+//        try (JMSContext context = connectionFactory.createContext(JMSContext.AUTO_ACKNOWLEDGE)) {
+//            Queue destination = context.createQueue(PRODUCER_QUEUE);
+//            JMSProducer producer = context.createProducer();
+
+		producer.send(destination, body);
+		log.info("post request - producer got message");
+
+	}
 }

@@ -34,8 +34,6 @@ public class MessageProducer implements Runnable {
 	@Inject
 	ConnectionFactory connectionFactory;
 
-	JMSProducer producer;
-	Queue destination;
 
 	private final Random random = new Random();
 	private final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
@@ -50,22 +48,14 @@ public class MessageProducer implements Runnable {
 
 	@Override
 	public void run() {
-
-		try (JMSContext context = connectionFactory.createContext(JMSContext.AUTO_ACKNOWLEDGE)) {
-			destination = context.createQueue(PRODUCER_QUEUE);
-			producer = context.createProducer();
-
-		}
-//            sendMessageBody(PRODUCED_MESSAGE+Integer.toString(random.nextInt(100)));
+            sendMessageBody(PRODUCED_MESSAGE+Integer.toString(random.nextInt(100)));
 	}
 
 	public void sendMessageBody(String body) {
-//        try (JMSContext context = connectionFactory.createContext(JMSContext.AUTO_ACKNOWLEDGE)) {
-//            Queue destination = context.createQueue(PRODUCER_QUEUE);
-//            JMSProducer producer = context.createProducer();
+	       try (JMSContext context = connectionFactory.createContext(JMSContext.AUTO_ACKNOWLEDGE)) {
+	            Queue destination = context.createQueue(PRODUCER_QUEUE);
+	            JMSProducer producer = context.createProducer();
 
-		producer.send(destination, body);
-		log.info("post request - producer got message");
-
-	}
+	            producer.send(destination, body);
+	        }
 }

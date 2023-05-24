@@ -18,7 +18,7 @@ import jakarta.ws.rs.core.Response;
 /**
  * A simple resource showing the last price.
  */
-@Path("/persons")
+@Path("/messages")
 public class MessageResource {
 
     @Inject

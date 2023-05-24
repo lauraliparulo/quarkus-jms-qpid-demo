@@ -42,12 +42,12 @@ public class MessageConsumerTest {
 	        
 	      
 	        try (JMSContext context = QpidJmsTestSupport.createContext()) {
-	        	context.start();
+//	        	context.start();
 	            Queue destination = context.createQueue(MessageConsumer.CONSUMER_QUEUE);
 	            JMSProducer producer = context.createProducer();
 
 	            producer.send(destination, body);
-	            Thread.sleep(8000);
+	            Thread.sleep(5000);
 	            Response response = RestAssured.with().body(body).get(RECEIVE_MESSAGE_ENDPOINT_PATH);
 	            Assertions.assertEquals(Status.OK.getStatusCode(), response.statusCode());
 

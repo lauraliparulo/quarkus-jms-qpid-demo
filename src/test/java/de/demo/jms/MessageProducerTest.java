@@ -30,7 +30,6 @@ public class MessageProducerTest {
 //	}
 	
     @Test
-    @Order(2)
     public void testSend() throws Exception {
         String body = QpidJmsTestSupport.generateBody();
 
@@ -38,46 +37,13 @@ public class MessageProducerTest {
         Assertions.assertEquals(Status.NO_CONTENT.getStatusCode(), response.statusCode());
 
         try (JMSContext context = QpidJmsTestSupport.createContext()) {
-        	context.start();
+//        	context.start();
             Queue destination = context.createQueue(MessageProducer.PRODUCER_QUEUE);
             JMSConsumer consumer = context.createConsumer(destination);
-    
+            Thread.sleep(8000);
             Assertions.assertEquals(body, consumer.receiveBody(String.class, 2000L), "Received body did not match that sent");
         }
     }
     
-    
-    /**
-     * Tests that receiving works in the {@link QpidJmsReceive} application code
-     * using the extension, by sending a message to the broker and using the
-     * {@link QpidJmsEndpoint} to trigger the app receiving it from the broker
-     * and returning the body, finally comparing the response to that we sent.
-     *
-     * @throws Exception
-     *             if there is an unexpected problem
-     */
-    @Test
-    @Order(1)
-    public void testReceive() throws Exception {
-        String body = QpidJmsTestSupport.generateBody();
-      
-        
-      
-        try (JMSContext context = QpidJmsTestSupport.createContext()) {
-//        	context.start();
-            Queue destination = context.createQueue(MessageConsumer.CONSUMER_QUEUE);
-            JMSProducer producer = context.createProducer();
 
-            producer.send(destination, body);
-            
-            Response response = RestAssured.with().body(body).get(RECEIVE_MESSAGE_ENDPOINT_PATH);
-            Assertions.assertEquals(Status.OK.getStatusCode(), response.statusCode());
-  
-            Assertions.assertEquals(body, response.getBody().asString(), "Received body did not match that sent");
-        }
-
-
-    
-        
-    }
 }

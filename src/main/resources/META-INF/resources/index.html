@@ -1,30 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Prices</title>
+<meta charset="UTF-8">
+<title>Prices</title>
 
-    <link rel="stylesheet" type="text/css"
-          href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.24.0/css/patternfly.min.css">
-    <link rel="stylesheet" type="text/css"
-          href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.24.0/css/patternfly-additions.min.css">
+<link rel="stylesheet" type="text/css"
+	href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.24.0/css/patternfly.min.css">
+<link rel="stylesheet" type="text/css"
+	href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.24.0/css/patternfly-additions.min.css">
 </head>
 <body>
-<div class="container">
+	<div class="container">
 
-    <h2>Last message</h2>
-    <div class="row">
-    <p class="col-md-12"><button id="fetch">Fetch</button>The last message is <strong><span id="content">N/A</span></strong>.</p>
-    </div>
-</div>
+		<h2>Last message</h2>
+		<div class="row">
+			<p class="col-md-12">
+				<button id="fetch">Fetch</button>
+				The last message is <strong><span id="content">N/A</span></strong>.
+			</p>
+		</div>
+
+		<h2>Send message</h2>
+		<div class="row">
+			<p class="col-md-12">
+			<form id="sendMessage">
+				<label for="sendMessage">Insert message: </label> <input id="myMessage"
+					name="message" value="" /> 
+					<input type="submit" value="Send Message" />
+				</p>
+			</form>
+
+		</div>
+	</div>
 </body>
 <script>
-    document.getElementById("fetch").addEventListener("click", function() {
-        fetch("/messages/last").then(function (response) {
-            response.text().then(function (text) {
-                document.getElementById("content").textContent = text;
-            })
-        })
-    })
+	document.getElementById("myMessage").addEventListener("submit", (event) => {
+	    event.preventDefault();
+	    sendData();
+	  });
+		document.getElementById("fetch").addEventListener("click", function() {
+		fetch("/messages/last").then(function(response) {
+			response.text().then(function(text) {
+				document.getElementById("content").textContent = text;
+			})
+		})
+	})
+	
+	function sendData() {
+			new XMLHttpRequest().open("POST","/messages/send");
+		}
 </script>
 </html>

@@ -47,8 +47,8 @@ public class PersonReactiveConsumerTest {
      */
     @Test
     public void testReceive() throws Exception {
-        String body = QpidJmsTestSupport.generateBody();
-      
+//        String body = QpidJmsTestSupport.generateBody();
+      String body = "TODO"
         
       
         try (JMSContext context = QpidJmsTestSupport.createContext()) {

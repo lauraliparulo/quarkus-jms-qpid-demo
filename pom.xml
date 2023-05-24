@@ -17,6 +17,7 @@
 		<quarkus-test-artemis-version>3.0.0.Alpha5</quarkus-test-artemis-version>
 		<maven.jar.plugin.version>3.1.0</maven.jar.plugin.version>
 	</properties>
+	
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -35,6 +36,7 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+	
 	<dependencies>
 
 		<!-- JAKARTA EE 10 -->

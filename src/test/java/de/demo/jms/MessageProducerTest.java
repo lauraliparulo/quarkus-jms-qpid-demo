@@ -19,12 +19,6 @@ import jakarta.ws.rs.core.Response.Status;
 @QuarkusTest
 @QuarkusTestResource(ArtemisTestResource.class)
 public class MessageProducerTest {
-
-	
-//	@BeforeEach
-//	public void initialise() throws InterruptedException {
-//	    Thread.sleep(8000);
-//	}
 	
     @Test
     public void testSend() throws Exception {
@@ -34,15 +28,12 @@ public class MessageProducerTest {
         Assertions.assertEquals(Status.NO_CONTENT.getStatusCode(), response.statusCode());
 
         try (JMSContext context = QpidJmsTestSupport.createContext()) {
-        	context.start();
             Queue destination = context.createQueue(MessageProducer.PRODUCER_QUEUE);
             JMSConsumer consumer = context.createConsumer(destination);
             Thread.sleep(5000);
             
-
             Assertions.assertEquals(body, consumer.receive().toString(), "Received body did not match that sent");
             
-    
         }
     }
     

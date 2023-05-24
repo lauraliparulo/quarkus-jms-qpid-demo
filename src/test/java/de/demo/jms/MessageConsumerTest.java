@@ -39,8 +39,6 @@ public class MessageConsumerTest {
 	    public void testReceive() throws Exception {
 	        String body = QpidJmsTestSupport.generateBody();
 	      
-	        
-	      
 	        try (JMSContext context = QpidJmsTestSupport.createContext()) {
 //	        	context.start();
 	            Queue destination = context.createQueue(MessageConsumer.CONSUMER_QUEUE);
@@ -53,10 +51,7 @@ public class MessageConsumerTest {
 
 	            Assertions.assertEquals(body, response.getBody().asString(), "Received body did not match that sent");
 	        }
-
-
-	    
-	        
+         
 	    }
     
 }

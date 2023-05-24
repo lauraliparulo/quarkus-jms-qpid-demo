@@ -33,12 +33,6 @@
 				</anycast>
 			</address>
 
-			<address name="messages-receive-queue">
-				<anycast>
-					<queue name="messages-receive-queue" />
-				</anycast>
-			</address>
-
 			<address name="test-qpid-jms-send">
 				<anycast>
 					<queue name="test-qpid-jms-send" />

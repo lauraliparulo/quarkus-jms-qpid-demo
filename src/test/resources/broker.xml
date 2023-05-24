@@ -27,9 +27,9 @@
 
 		<addresses>
 
-			<address name="messages-send-queue">
+			<address name="messages-queue">
 				<anycast>
-					<queue name="messages-send-queue" />
+					<queue name="messages-queue" />
 				</anycast>
 			</address>
 

@@ -9,7 +9,7 @@ import jakarta.jms.Queue;
 
 @ApplicationScoped
 public class MessageProducer {
-	public final static String PRODUCER_QUEUE = "messages-send-queue";
+	public final static String PRODUCER_QUEUE = "messages-queue";
 	
 
     @Inject

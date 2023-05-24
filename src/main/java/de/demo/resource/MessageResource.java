@@ -3,6 +3,7 @@ package de.demo.resource;
 import de.demo.jms.MessageConsumer;
 import de.demo.jms.MessageProducer;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
@@ -33,7 +34,7 @@ public class MessageResource {
     
     @POST
     @Path("send")
-//    @Consumes(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.TEXT_PLAIN)
 //    @Produces(MediaType.APPLICATION_JSON)
     public void sendMessage(String message) {
          producer.sendMessageBody(message);

@@ -20,7 +20,7 @@
 		<security-enabled>false</security-enabled>
 
 		<acceptors>
-			<acceptor name="amqp-acceptor">tcp://localhost:5672?protocols=AMQP;username=quarkus;password=password</acceptor>
+			<acceptor name="amqp-acceptor">tcp://localhost:15672?protocols=AMQP;username=quarkus;password=password</acceptor>
 			<!-- acceptor name="amqp-acceptor">tcp://localhost:5672?protocols=AMQP;username=quarkus;password=password;connectionTtl=2000000</acceptor -->
 		</acceptors>
 

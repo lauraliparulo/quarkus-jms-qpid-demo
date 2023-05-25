@@ -37,6 +37,7 @@ public class PersonResource {
 		return persons;
 	}
 
+	
 	@POST
 	@Consumes(MediaType.TEXT_PLAIN)
 	public void addPerson(String name) {

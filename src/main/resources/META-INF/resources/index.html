@@ -25,11 +25,11 @@
 			<p class="col-md-12">
 			<form id="sendMessage" method="POST">
 				<div>
-					<label for="sendMessage">Insert message: </label> 
-					<input id="myMessage" name="message" value="" /> 
+					<label for="sendMessage">Insert message: </label> <input
+						id="myMessage" name="message" value="" />
 				</div>
 				<div>
-					<button>Send message</button>
+					<button id="send">Send message</button>
 				</div>
 			</form>
 
@@ -37,20 +37,34 @@
 	</div>
 </body>
 <script>
-	document.getElementById("myMessage").addEventListener("submit", (event) => {
-	    event.preventDefault();
-	    sendData();
-	  });
+
 		document.getElementById("fetch").addEventListener("click", function() {
-		fetch("/messages/last").then(function(response) {
+		fetch("/messages/last/").then(function(response) {
 			response.text().then(function(text) {
 				document.getElementById("content").textContent = text;
 			})
 		})
-	})
+	});
 	
-	function sendData() {
-			new XMLHttpRequest().open("POST","/messages/send");
-		}
+		document.getElementById("send").addEventListener("submit", (event) => {
+			fetch('/messages/send/', {
+				  method: 'POST',
+				  headers: {
+				    'Accept': 'application/json, text/plain, */*',
+				    'Content-Type': 'application/json; charset=UTF-8"'
+				  },
+				  body: JSON.stringify({
+					    message: document.getElementById("myMessage").textContent
+					  }),
+				}).then(function (response) {
+				    return response.json();
+				})
+				.then(function (result) {
+				    alert(result);
+				})
+				.catch (function (error) {
+				    console.log('Request failed', error);
+				})
+			});
 </script>
 </html>

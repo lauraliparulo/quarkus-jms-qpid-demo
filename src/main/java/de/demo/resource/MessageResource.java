@@ -34,7 +34,7 @@ public class MessageResource {
     
     @POST
     @Path("send")
-    @Consumes(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
     @Produces("text/plain")
     public Response sendMessage(String message) {
          producer.sendMessageBody(message);

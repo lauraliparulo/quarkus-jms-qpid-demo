@@ -12,6 +12,7 @@ import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import io.smallrye.mutiny.Multi;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.core.Response.Status;
 
@@ -44,8 +45,8 @@ public class PersonReactiveJMSIntegrationTest {
     	
         Response response = RestAssured.with().get(RECEIVE_PERSONS_ENDPOINT_PATH);
         Assertions.assertEquals(Status.OK.getStatusCode(), response.statusCode());
-
-        Log.info(response.getBody().asPrettyString());
+       
+        Log.info(response.getBody());
         Assertions.assertNotNull(response.getBody());
     	
     	

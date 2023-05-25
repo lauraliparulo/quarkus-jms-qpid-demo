@@ -26,11 +26,11 @@ import jakarta.ws.rs.core.Response;
 public class PersonResource {
 
 	@Inject
-	@Channel("persons-amqp-queue")
+	@Channel("persons-amqp-outgoing-queue")
 	Multi<Message<Person>> persons;
 
 	@Inject
-	@Channel("persons-amqp-queue")
+	@Channel("persons-amqp-incoming-queue")
 	Emitter<Message<Person>> personEmitter;
 
 	@GET

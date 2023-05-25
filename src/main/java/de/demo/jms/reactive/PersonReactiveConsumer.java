@@ -12,7 +12,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class PersonReactiveConsumer {
 
-	public final static String CONSUMER_QUEUE = "persons-amqp-queue";
+	public final static String CONSUMER_QUEUE = "persons-amqp-incoming-queue";
 	
 	@Incoming(CONSUMER_QUEUE)
 	public CompletionStage<Void> consume(Message<Person> person) {

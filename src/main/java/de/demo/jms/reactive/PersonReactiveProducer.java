@@ -13,7 +13,7 @@ import jakarta.jms.Queue;
 @ApplicationScoped
 public class PersonReactiveProducer {
 
-	public final static String PRODUCER_QUEUE = "persons-amqp-queue";
+	public final static String PRODUCER_QUEUE = "persons-amqp-outgoing-queue";
 	
 	
 	@Outgoing(PRODUCER_QUEUE)

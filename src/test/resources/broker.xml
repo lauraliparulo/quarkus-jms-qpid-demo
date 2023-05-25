@@ -39,13 +39,17 @@
 				</anycast>
 			</address>
 
-			<address name="persons-amqp-queue">
+			<address name="persons-amqp-incoming-queue">
 				<anycast>
-					<queue name="persons-amqp-queue" />
+					<queue name="persons-amqp-incoming-queue" />
 				</anycast>
 			</address>
 
-
+		<address name="persons-amqp-outcoming-queue">
+				<anycast>
+					<queue name="persons-amqp-outcoming-queue" />
+				</anycast>
+			</address>
 
 		</addresses>
 	</core>

@@ -40,7 +40,7 @@ public class MessageConsumerTest {
 	        String body = QpidJmsTestSupport.generateBody();
 	      
 	        try (JMSContext context = QpidJmsTestSupport.createContext()) {
-//	        	context.start();
+
 	            Queue destination = context.createQueue(MessageConsumer.CONSUMER_QUEUE);
 	            JMSProducer producer = context.createProducer();
 

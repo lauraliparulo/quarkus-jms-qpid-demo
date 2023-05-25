@@ -20,7 +20,7 @@ import jakarta.ws.rs.core.Response.Status;
 public class MessageProducerTest {
 	
 	@Inject
-	MessageConsumer consumer;
+	MessageConsumer messageConsumer;
 	
     @Test
     public void testSend() throws Exception {
@@ -33,6 +33,7 @@ public class MessageProducerTest {
             io.restassured.response.Response response = RestAssured.with().body(body).post(SEND_MESSAGE_ENDPOINT_PATH);
             Assertions.assertEquals(Status.OK.getStatusCode(), response.statusCode());
      
+            Assertions.assertEquals(body, messageConsumer.getLastMessage());
             Assertions.assertEquals(body, consumer.receiveBody(String.class, 2000L), "Received body did not match that sent");
             
         }

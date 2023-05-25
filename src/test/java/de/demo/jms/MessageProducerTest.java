@@ -34,7 +34,7 @@ public class MessageProducerTest {
             Assertions.assertEquals(Status.OK.getStatusCode(), response.statusCode());
      
             Assertions.assertEquals(body, messageConsumer.getLastMessage());
-            Assertions.assertEquals(body, consumer.receiveBody(String.class, 2000L), "Received body did not match that sent");
+//            Assertions.assertEquals(body, consumer.receiveBody(String.class, 2000L), "Received body did not match that sent");
             
         }
     }

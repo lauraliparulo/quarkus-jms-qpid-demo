@@ -27,12 +27,13 @@ public class MessageProducerTest {
         String body = QpidJmsTestSupport.generateBody();
         
         try (JMSContext context = QpidJmsTestSupport.createContext()) {
+        	context.start();
             Queue destination = context.createQueue(MessageProducer.PRODUCER_QUEUE);
             JMSConsumer consumer = context.createConsumer(destination);
 
             io.restassured.response.Response response = RestAssured.with().body(body).post(SEND_MESSAGE_ENDPOINT_PATH);
             Assertions.assertEquals(Status.OK.getStatusCode(), response.statusCode());
-            
+            Thread.sleep(5000);
             Assertions.assertEquals(body, consumer.receiveBody(String.class, 2000L), "Received body did not match that sent");
             
         }

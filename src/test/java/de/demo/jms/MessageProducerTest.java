@@ -32,7 +32,7 @@ public class MessageProducerTest {
 
             io.restassured.response.Response response = RestAssured.with().body(body).post(SEND_MESSAGE_ENDPOINT_PATH);
             Assertions.assertEquals(Status.OK.getStatusCode(), response.statusCode());
-            Thread.sleep(5000);
+     
             Assertions.assertEquals(body, consumer.receiveBody(String.class, 2000L), "Received body did not match that sent");
             
         }

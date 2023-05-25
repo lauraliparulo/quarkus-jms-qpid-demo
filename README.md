@@ -71,3 +71,6 @@ Expose it as service
 
 `kubectl expose pod amqp --port=5672 -n event-bus`
 
+
+### Run tests
+> mvn clean compile quarkus:test

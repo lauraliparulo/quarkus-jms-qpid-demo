@@ -1,5 +1,7 @@
 package de.demo.jms.reactive;
 
+import static de.demo.jms.QpidJmsTestSupport.RECEIVE_PERSONS_ENDPOINT_PATH;
+
 /*
 * Copyright 2020 the original author or authors.
 *
@@ -20,7 +22,6 @@ package de.demo.jms.reactive;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import de.demo.jms.QpidJmsTestSupport;
 import io.quarkus.artemis.test.ArtemisTestResource;
 import io.quarkus.logging.Log;
 import io.quarkus.test.common.QuarkusTestResource;
@@ -28,11 +29,7 @@ import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import jakarta.inject.Inject;
-import jakarta.jms.JMSContext;
-import jakarta.jms.JMSProducer;
-import jakarta.jms.Queue;
 import jakarta.ws.rs.core.Response.Status;
-import static de.demo.jms.QpidJmsTestSupport.RECEIVE_PERSONS_ENDPOINT_PATH;
 @QuarkusTest
 @QuarkusTestResource(ArtemisTestResource.class)
 public class PersonReactiveConsumerTest {

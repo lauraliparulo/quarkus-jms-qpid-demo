@@ -1,23 +1,9 @@
 package de.demo.jms.reactive;
 
 import static de.demo.jms.QpidJmsTestSupport.RECEIVE_PERSONS_ENDPOINT_PATH;
+import static de.demo.jms.QpidJmsTestSupport.SEND_MESSAGE_ENDPOINT_PATH;
 
-/*
-* Copyright 2020 the original author or authors.
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-* http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
-
+import org.eclipse.microprofile.reactive.messaging.Message;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -30,12 +16,16 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.core.Response.Status;
+
 @QuarkusTest
 @QuarkusTestResource(ArtemisTestResource.class)
 public class PersonReactiveConsumerTest {
 
 	@Inject
 	PersonReactiveProducer personProducer;
+	
+	@Inject
+	PersonReactiveConsumer personConsumer;
 
     /**
      * Tests that receiving works in the {@link QpidJmsReceive} application code
@@ -47,7 +37,7 @@ public class PersonReactiveConsumerTest {
      *             if there is an unexpected problem
      */
     @Test
-    public void testReceive() throws Exception {
+    public void testReceivePersons() throws Exception {
 
          personProducer.produceAStreamOfMessagesOfPersons();
        
@@ -57,5 +47,18 @@ public class PersonReactiveConsumerTest {
         Log.info(response.getBody().asPrettyString());
         Assertions.assertNotNull(response.getBody());
         
+    }
+    
+    @Test
+    public void testSendPersons() throws Exception {
+    	RestAssured.with().body("Laura").post(SEND_MESSAGE_ENDPOINT_PATH);
+    	
+        Response response = RestAssured.with().get(RECEIVE_PERSONS_ENDPOINT_PATH);
+        Assertions.assertEquals(Status.OK.getStatusCode(), response.statusCode());
+
+        Log.info(response.getBody().asPrettyString());
+        Assertions.assertNotNull(response.getBody());
+    	
+    	
     }
 }

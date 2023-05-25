@@ -6,9 +6,6 @@ import org.eclipse.microprofile.reactive.messaging.Outgoing;
 import io.smallrye.mutiny.Multi;
 import io.smallrye.reactive.messaging.amqp.OutgoingAmqpMetadata;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.jms.JMSContext;
-import jakarta.jms.JMSProducer;
-import jakarta.jms.Queue;
 
 @ApplicationScoped
 public class PersonReactiveProducer {

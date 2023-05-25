@@ -8,16 +8,13 @@ import org.eclipse.microprofile.reactive.messaging.Message;
 import org.jboss.resteasy.reactive.RestStreamElementType;
 
 import de.demo.jms.reactive.Person;
-import io.smallrye.common.annotation.NonBlocking;
 import io.smallrye.mutiny.Multi;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
 
 /**
  * A simple resource showing the last price.

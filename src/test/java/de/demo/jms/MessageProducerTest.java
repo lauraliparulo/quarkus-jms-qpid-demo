@@ -26,9 +26,9 @@ public class MessageProducerTest {
     public void testSend() throws Exception {
         String body = QpidJmsTestSupport.generateBody();
         
-        try (JMSContext context = QpidJmsTestSupport.createContext()) {
-            Queue destination = context.createQueue(MessageProducer.PRODUCER_QUEUE);
-            JMSConsumer consumer = context.createConsumer(destination);
+//        try (JMSContext context = QpidJmsTestSupport.createContext()) {
+//            Queue destination = context.createQueue(MessageProducer.PRODUCER_QUEUE);
+//            JMSConsumer consumer = context.createConsumer(destination);
 
             io.restassured.response.Response response = RestAssured.with().body(body).post(SEND_MESSAGE_ENDPOINT_PATH);
             Assertions.assertEquals(Status.OK.getStatusCode(), response.statusCode());
@@ -36,7 +36,7 @@ public class MessageProducerTest {
             Assertions.assertEquals(body, messageConsumer.getLastMessage());
 //            Assertions.assertEquals(body, consumer.receiveBody(String.class, 2000L), "Received body did not match that sent");
             
-        }
+//        }
     }
     
 

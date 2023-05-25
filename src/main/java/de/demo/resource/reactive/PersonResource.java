@@ -31,7 +31,7 @@ public class PersonResource {
 
 	@Inject
 	@Channel("persons-amqp-incoming-queue")
-	Emitter<Message<Person>> personEmitter;
+	Emitter<Person> personEmitter;
 
 	@GET
 	@Path("/last")
@@ -43,7 +43,7 @@ public class PersonResource {
 	@POST
 	@Consumes(MediaType.TEXT_PLAIN)
 	public void addPerson(String name) {
-		CompletionStage<Void> ack = personEmitter.send(Message.of(new Person(name)));
+		CompletionStage<Void> ack = personEmitter.send(new Person(name));
 	}
 
 }
